@@ -9,19 +9,55 @@ e.grid(row = 0, column = 0, columnspan=3, padx = 10, pady = 10)
 def button_add():
     number = e.get()
     global num
-    num = int(number)
+    global math
+    math = "add"
+    num = float(number)
+    e.delete(0, END)
+
+def button_sub():
+    number = e.get()
+    global num
+    global math
+    math = "sub"
+    num = float(number)
+    e.delete(0, END)
+
+def button_mul():
+    number = e.get()
+    global num
+    global math
+    math = "mul"
+    num = float(number)
+    e.delete(0, END)
+
+def button_div():
+    number = e.get()
+    global num
+    global math
+    math = "div"
+    num = float(number)
     e.delete(0, END)
 
 def button_click(number):
     current = e.get()
     e.delete(0, END)
-    e.insert(0, current + str(number))
+    if not current == ".":
+        e.insert(0, current + str(number))
+    else:
+        e.insert(0, current + str(number))
 
 def button_clear():
     e.delete(0, END)
 
 def button_equal():
-    result = num + int(e.get())
+    if math == "add":
+        result = num + float(e.get())
+    if math == "sub":
+        result = num - float(e.get())
+    if math == "mul":
+        result = num * float(e.get())
+    if math == "div":
+        result = num / float(e.get())
     e.delete(0, END)
     e.insert(0, result)
 
@@ -38,11 +74,16 @@ button_7 = Button(root, text="7", padx = 40, pady = 20, command=lambda: button_c
 button_8 = Button(root, text="8", padx = 40, pady = 20, command=lambda: button_click(8))
 button_9 = Button(root, text="9", padx = 40, pady = 20, command=lambda: button_click(9))
 button_0 = Button(root, text="0", padx = 40, pady = 20, command=lambda: button_click(0))
+button_point = Button(root, text=".", padx = 40, pady = 20, command=lambda: button_click("."))
 
 # Functionality
 button_add = Button(root, text="+", padx = 40, pady = 20, command=button_add)
+button_sub = Button(root, text="-", padx = 40, pady = 20, command=button_sub)
+button_mul = Button(root, text="*", padx = 40, pady = 20, command=button_mul)
+button_div = Button(root, text="/", padx = 40, pady = 20, command=button_div)
+
 button_equal = Button(root, text="=", padx = 40, pady = 20, command=button_equal)
-button_clear = Button(root, text="Clear", padx = 91, pady = 20, command=button_clear)
+button_clear = Button(root, text="Clear", padx = 80, pady = 20, command=button_clear)
 
 # Print buttons
 
@@ -63,7 +104,12 @@ button_0.grid(row = 4, column = 1)
 
 # Functionality buttons
 button_add.grid(row = 4, column = 0)
-button_clear.grid(row = 5, column = 0, columnspan=3)
-button_equal.grid(row = 4, column = 2)
+button_sub.grid(row = 4, column = 2)
+button_mul.grid(row = 5, column = 0)
+button_div.grid(row = 5, column = 1)
+button_point.grid(row = 5, column = 2)
+
+button_clear.grid(row = 6, column = 0, columnspan=2)
+button_equal.grid(row = 6, column = 2)
 
 root.mainloop()
